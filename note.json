@@ -1,0 +1,105 @@
+{
+    "Info - Grade" : {
+        "A" : "80 - 100",
+        "B" : "60 - 80",
+        "C" : "40 - 60",
+        "D" : "0 - 40",
+        "Component" : {
+            "Provinsi" : {
+                "1" : "70 B",
+                "2" : "65 B",
+                "3" : "60 C",
+                "else" : "55 C"
+            },
+            "Nasional" : {
+                "1" : "85, A",
+                "2" : "80, B",
+                "3" : "75,B",
+                "else" : "70 B"
+            },
+            "International" : {
+                "1" : "100, A",
+                "2" : "95,A",
+                "3" : "90, A",
+                "else" : "85 A"
+            }      
+        }
+    },
+    "Api" : {
+        "Login" : {
+            "Method" : "POST",
+            "Header" : "Api-key",
+            "Data"   : [
+                "username",
+                "password"
+            ]
+        },
+        "Create" :{
+            "Method" : "POST",
+            "Data" : [
+                "Id",
+                "NISN",
+                "Nama",
+                "Nama Lomba",
+                "Tgl Lomba",
+                "Penyelengara",
+                "Tingkatan [Provinsi,Nasional,International]",
+                "Peringkat",
+                "Grade (Auto)",
+                "Pembimbing",
+                "Keterangan"
+            ]
+        },
+        "Read" : {
+            "Method" : "GET",
+            "Data" : [
+                "Id",
+                "NISN",
+                "Nama",
+                "Nama Lomba",
+                "Tgl Lomba",
+                "Penyelengara",
+                "Tingkatan [Provinsi,Nasional,International]",
+                "Peringkat",
+                "Grade (Auto)",
+                "Pembimbing",
+                "Keterangan"
+            ]
+        },
+        "Update" : {
+            "Method" : "PUT",
+            "Data" : [
+                "Id",
+                "NISN",
+                "Nama",
+                "Nama Lomba",
+                "Tgl Lomba",
+                "Penyelengara",
+                "Tingkatan [Provinsi,Nasional,International]",
+                "Peringkat",
+                "Grade (Auto)",
+                "Pembimbing",
+                "Keterangan"
+            ]
+        },
+        "Delete" : {
+            "Method" : "DELETE",
+            "Data" : [
+                "Id",
+                "NISN",
+                "Nama",
+                "Nama Lomba",
+                "Tgl Lomba",
+                "Penyelengara",
+                "Tingkatan [Provinsi,Nasional,International]",
+                "Peringkat",
+                "Grade (Auto)",
+                "Pembimbing",
+                "Keterangan"
+            ]
+        }
+    },
+    "Android" : {
+
+    }
+}
