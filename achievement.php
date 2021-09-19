@@ -18,6 +18,7 @@ class achievement{
         $this->connection->close();
     }
     public function grade($tingkatan,$peringkat){
+        $tingkatan = strtolower($tingkatan);
         switch ($tingkatan) {
             case 'provinsi':
                 switch ($peringkat) {
@@ -65,9 +66,17 @@ class achievement{
     public function read()
     {
         $result = $this->connection->query('SELECT * FROM achievements');    
-        while($row = $result->fetch_assoc())
-            $rows[] = $row;
+        while($row = $result->fetch_assoc()){
+            $rows[] = $row['id']. " : ". $row['nama'];
+        }
         $this->response->data = $rows;
+        return $this->response;
+    }
+    public function show($id)
+    {
+        $id = (int)$id;
+        $result = $this->connection->query("SELECT * FROM achievements WHERE id = '$id'");
+        $this->response->data = $result->fetch_assoc();
         return $this->response;
     }
 

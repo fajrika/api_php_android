@@ -23,13 +23,13 @@ class prepare
         require_once('auth.php');
         $this->data->username = $this->input->get_attribute('username');
         $this->data->password = $this->input->get_attribute('password');
-
+        
         if ($this->data->username && $this->data->password) {
             if ((new auth)->login($this->data->username, $this->data->password)) {
                 $this->response->code = 200;
                 $this->response->message = 'login successfully';
             } else {
-                $this->response->code = 401;
+                $this->response->code = 209;
                 $this->response->message = 'failed username or password';
             }
         } else {
@@ -43,7 +43,13 @@ class prepare
         require_once('achievement.php');
         $this->response->code = 200;
         $this->response->message = 'successfully';
-        $this->response = (new achievement($this->response))->read();
+        $id = strtolower(explode('/', $_SERVER['PATH_INFO'] ?? '')[2] ?? '');
+        if($id != ''){
+            $this->response = (new achievement($this->response))->show($id);
+        }else{
+            $this->response = (new achievement($this->response))->read();
+        }
+        
     }
 
     public function store_achievement()
@@ -79,17 +85,17 @@ class prepare
 
     public function edit_achievement()
     {
-        require_once('achievement.php');
-        $this->data->id         = $this->input->get_attribute('id');
-        $this->data->nisn       = $this->input->get_attribute('nisn');
-        $this->data->nama       = $this->input->get_attribute('nama');
-        $this->data->nama_lomba = $this->input->get_attribute('nama_lomba');
-        $this->data->tgl_lomba  = $this->input->get_attribute('tgl_lomba');
-        $this->data->penyelenggara  = $this->input->get_attribute('penyelenggara');
-        $this->data->tingkatan  = $this->input->get_attribute('tingkatan');
-        $this->data->peringkat  = $this->input->get_attribute('peringkat');
-        $this->data->pembimbing = $this->input->get_attribute('pembimbing');
-        $this->data->keterangan = $this->input->get_attribute('keterangan')??null;
+        
+        $this->data->id         = $this->input->put('id');
+        $this->data->nisn       = $this->input->put('nisn');
+        $this->data->nama       = $this->input->put('nama');
+        $this->data->nama_lomba = $this->input->put('nama_lomba');
+        $this->data->tgl_lomba  = $this->input->put('tgl_lomba');
+        $this->data->penyelenggara  = $this->input->put('penyelenggara');
+        $this->data->tingkatan  = $this->input->put('tingkatan');
+        $this->data->peringkat  = $this->input->put('peringkat');
+        $this->data->pembimbing = $this->input->put('pembimbing');
+        $this->data->keterangan = $this->input->put('keterangan')??null;
 
         if ($this->data->id && $this->data->nisn && $this->data->nama && $this->data->nama_lomba && $this->data->tgl_lomba && $this->data->penyelenggara && $this->data->tingkatan && $this->data->peringkat && $this->data->pembimbing) {
             $this->response = (new achievement($this->response))
@@ -113,8 +119,9 @@ class prepare
 
     public function destroy_achievement()
     {
-        require_once('achievement.php');
-        $this->data->id = $this->input->get_attribute('id');
+        
+        $this->data->id = strtolower(explode('/', $_SERVER['PATH_INFO'] ?? '')[2] ?? '');
+        // $this->data->id = $this->input->get_attribute('id');
         if ($this->data->id)
             $this->response = (new achievement($this->response))->delete($this->data->id);
         else {

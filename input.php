@@ -2,6 +2,10 @@
 
 class input
 {
+    function post(string $name){
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        return $_POST[$name]??null;
+    }
     function get_attribute(string $name)
     {
         $lines = file('php://input');
@@ -26,5 +30,9 @@ class input
 
         $data = mb_substr(implode('', $PUT), 0, -2, 'UTF-8');
         return $data !== '' ? $data : ($_POST[$name]??null);
+    }
+    public function put($parameter){
+        parse_str(file_get_contents("php://input"),$post_vars);
+        return $post_vars[$parameter]??null;
     }
 }

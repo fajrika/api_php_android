@@ -3,10 +3,10 @@
 class connection{
     public $conn;
     public function __construct(){
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "abc123??";
-        $db = "dennis";
+        $servername = "151.106.117.102";
+        $username = "u210473105_dennis";
+        $password = "Antihack22.";
+        $db = "u210473105_dennis";
         $this->conn = new mysqli($servername, $username, $password,$db);
     }
 
